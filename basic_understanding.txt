@@ -1,0 +1,63 @@
+the avahi client is present in /etc/avahi
+check the file avahi-daemon.conf and set a reflector flag to yes for enable and discove the devices 
+
+
+192.67.20.xx series network, has tv connected 
+
+	tv 1
+	tv2
+	tc 3
+	........10
+	
+192.67.10.xx series netowrk which has 10 mobiles connected as show below
+	mob 1
+	mob 2....10
+	
+	
+here we have linux server: ip a 
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether c8:1f:66:f6:d2:e1 brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f0
+    inet 192.168.10.5/24 brd 192.168.10.255 scope global dynamic noprefixroute eno1
+       valid_lft 44718sec preferred_lft 44718sec
+    inet6 fe80::55e6:dfe4:d12d:d556/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: eno2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether c8:1f:66:f6:d2:e2 brd ff:ff:ff:ff:ff:ff
+    altname enp1s0f1
+    inet 192.168.20.5/24 brd 192.168.20.255 scope global dynamic noprefixroute eno2
+       valid_lft 44143sec preferred_lft 44143sec
+    inet6 fe80::6fe3:567f:d24e:f2b9/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+and we are using what is connected to chromecast
+to be discovered under mobile 
+
+mob 1 cast to tv1 not discovered
+
+
+all mob and all tv can be discovered in same network say wlan 
+
+
+we want each tv to discover each mob and not to be discovered by other 
+1:1 conncection is via different n/w 
+
+Use avahi as a broker and then be a bridge to establish one to one 1:1 
+
+now if we start avahi, it will discover to everyone but we don't want to reflect.
+
+		// mob 			tv
+		myfunc(192.67.10.5, 192.67.20.10)
+		{	
+			// create this part, how can we acheive this via avahi
+			the function name ?
+		}
+		
+		
+		mdns protocol
+		avahi is made to listen to these packets 
+
+check the below functions and read/study avahi
+avahi_dns_packet_is_query
+avahi_dns_packet_new_response
+avahi_dns_packet_get_field
